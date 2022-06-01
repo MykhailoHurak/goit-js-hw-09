@@ -1,3 +1,34 @@
+const startButton = document.querySelector('[data-start]');
+const stopButton = document.querySelector('[data-stop]');
+
+const TIME_DELAY = 1000;
+let timerId = null;
+
+stopButton.setAttribute('disabled', 'true');
+startButton.addEventListener('click', onStartButtonClick);
+stopButton.addEventListener('click', onStopButtonClick);
+
+function onStartButtonClick() {
+    timerId = setInterval(setBackgroundColor, TIME_DELAY);
+    startButton.setAttribute('disabled', 'true');
+    stopButton.removeAttribute('disabled');
+};
+
+function onStopButtonClick() {
+    clearInterval(timerId);
+    startButton.removeAttribute('disabled')
+    stopButton.setAttribute('disabled', 'true');
+};
+
+
+function setBackgroundColor() {
+    const color = getRandomHexColor();
+    document.body.style.backgroundColor = color;
+};
+
+function getRandomHexColor() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
 
 // ===============================
 // Завдання 1 - перемикач кольорів
